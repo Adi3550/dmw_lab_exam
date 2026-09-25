@@ -1,0 +1,80 @@
+Q1(e) - CROSS-SYSTEM QUERY EVIDENCE
+====================================
+
+Analytical engine:
+
+DuckDB
+
+The query reads directly from two systems.
+
+SOURCE 1
+--------
+
+MinIO
+
+Function:
+
+read_parquet()
+
+Example:
+
+s3://sales/curated/store_id=S05/year=2024/month=10/*.parquet
+
+
+SOURCE 2
+--------
+
+PostgreSQL
+
+Function:
+
+postgres_scan()
+
+Tables:
+
+products
+product_categories
+
+
+EXPLAIN ANALYZE EVIDENCE
+------------------------
+
+MinIO / Parquet:
+
+Total Files Read:
+1
+
+Rows:
+4,588
+
+
+PostgreSQL:
+
+products:
+1,224 rows
+
+product_categories:
+scanned
+
+
+Join:
+
+HASH_JOIN
+
+
+HTTPFS:
+
+#GET:
+2
+
+
+Total execution time:
+
+approximately 0.0778 seconds
+
+
+CONCLUSION
+----------
+
+DuckDB executed a single analytical query across MinIO and
+PostgreSQL without first copying the sales data into PostgreSQL.

@@ -1,0 +1,57 @@
+Q1(d) - HISTORICAL PRICE EVIDENCE
+==================================
+
+Historical prices are obtained from the PostgreSQL
+price_revisions table.
+
+Product matching uses:
+
+product_code
++
+business_date
++
+products.valid_from
++
+products.valid_to
+
+Then:
+
+product_sk
++
+business_date
++
+price_revisions.effective_from
++
+price_revisions.effective_to
+
+This ensures that the price applicable to the reporting period
+is selected rather than automatically using the current price.
+
+
+VERIFIED OUTPUT
+---------------
+
+Historical price query successfully returned:
+
+product_code
+business_date
+product_sk
+product_name
+historical_price
+effective_from
+effective_to
+
+
+October historical-price revenue:
+
+₹56,916,225.40
+
+
+Data source:
+
+MinIO:
+sales Parquet files
+
+PostgreSQL:
+products
+price_revisions

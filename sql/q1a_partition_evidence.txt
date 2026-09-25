@@ -1,0 +1,44 @@
+Q1(a) - OBJECT STORE AND PARTITIONING EVIDENCE
+================================================
+
+Object Store:
+MinIO
+
+Bucket:
+sales
+
+Curated layout:
+
+s3://sales/curated/
+    store_id=S01/year=2024/month=01/
+    store_id=S01/year=2024/month=02/
+    ...
+    store_id=S12/year=2024/month=12/
+
+Example query:
+S05 October 2024
+
+Path queried:
+s3://sales/curated/store_id=S05/year=2024/month=10/*.parquet
+
+Query result:
+
+store_id = S05
+revenue = 3,192,322.78
+
+EXPLAIN ANALYZE evidence:
+
+Total Files Read: 1
+
+Rows read:
+6,625
+
+This demonstrates that the store/month partition allows the query
+to target the required partition rather than scanning all
+store/month partitions.
+
+Query engine:
+DuckDB
+
+Storage:
+MinIO + Parquet

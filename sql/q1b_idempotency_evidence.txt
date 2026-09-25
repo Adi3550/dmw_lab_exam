@@ -1,0 +1,51 @@
+Q1(b) - IDEMPOTENCY EVIDENCE
+============================
+
+Safe line identity:
+
+(store_id, bill_no, line_no)
+
+Final curated dataset:
+
+Rows = 1,120,924
+
+Three ingestion runs produced the same result.
+
+RUN 1
+------
+Rows:
+1,120,924
+
+SHA-256:
+b573734dd50d5fb3095f96f29f37372a760b163594560b42972d31b040841fe8
+
+
+RUN 2
+------
+Rows:
+1,120,924
+
+SHA-256:
+b573734dd50d5fb3095f96f29f37372a760b163594560b42972d31b040841fe8
+
+
+RUN 3
+------
+Rows:
+1,120,924
+
+SHA-256:
+b573734dd50d5fb3095f96f29f37372a760b163594560b42972d31b040841fe8
+
+
+CONCLUSION
+----------
+
+All three runs produced:
+
+1,120,924 rows
+
+and the same SHA-256 checksum.
+
+Therefore the ingestion output is reproducible and safe to
+rerun without changing the final dataset.

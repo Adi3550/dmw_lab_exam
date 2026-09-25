@@ -1,0 +1,96 @@
+Q1(c) - DASHBOARD / STAR SCHEMA EVIDENCE
+=========================================
+
+Star schema created in dashboard.duckdb.
+
+DIMENSIONS
+----------
+
+dim_store:
+12 rows
+
+dim_category:
+14 rows
+
+dim_product:
+1,224 rows
+
+
+FACT TABLE
+----------
+
+fact_sales:
+1,120,924 rows
+
+
+FACT LINE TYPES
+---------------
+
+SALE:
+745,860
+
+RETURN:
+16,161
+
+DISCOUNT:
+22,603
+
+VOID:
+4,892
+
+TAX:
+165,704
+
+TENDER:
+165,704
+
+
+DASHBOARD DIMENSIONS
+--------------------
+
+The dashboard query supports slicing revenue by:
+
+- Store
+- Product category
+- Day of week
+- Month
+
+
+PRODUCT HISTORY
+---------------
+
+product_code is not used as the final product identifier.
+
+The historical product is resolved using:
+
+product_code
++
+business_date
++
+valid_from / valid_to
+
+The resulting product_sk is stored in fact_sales.
+
+
+REVENUE DEFINITION
+------------------
+
+Revenue includes:
+
+SALE
+RETURN
+DISCOUNT
+VOID
+
+Revenue excludes:
+
+TAX
+TENDER
+
+
+DESIGN BENEFIT
+--------------
+
+Store, category and product descriptive information is stored
+in dimension tables instead of being repeated on every sales
+line in the large fact table.
